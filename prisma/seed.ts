@@ -1,3 +1,4 @@
+// Este script vai colocar dados na BD
 const { PrismaClient } = require("@prisma/client");
 
 const prismaClient = new PrismaClient();
