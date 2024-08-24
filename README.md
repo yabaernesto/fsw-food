@@ -3,6 +3,11 @@
 Projeto desenvolvido durante o treinamento da Fullstack Week instruido pelo Filipe Rocha - Dicas para Devs. 
 Uma aplicação de Food, clone do IFood.
 
+### project
+<video>
+  <source />
+</video>
+
 ## Techs
 - ReactJS
 - TypeScript
@@ -18,7 +23,7 @@ Uma aplicação de Food, clone do IFood.
 - ESLint
 - Git Hooks
 
-## Front-end
+## screens
 <div>
 </div>
 
