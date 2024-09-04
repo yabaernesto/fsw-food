@@ -63,7 +63,7 @@ const CartIrem = ({ cartProduct }: CartIremProps) => {
             >
               <ChevronLeftIcon size={16} />
             </Button>
-            <span className="block w-3 text-xs">{cartProduct.quantity}</span>
+            <span className="block w-2 text-xs">{cartProduct.quantity}</span>
             <Button
               size="icon"
               className="h-7 w-7"
