@@ -4,7 +4,7 @@ Projeto desenvolvido durante o treinamento da Fullstack Week instruido pelo Fili
 Uma aplicação de Food, clone do IFood.
 
 ### Project
-<video>
+<video width="300">
   <source />
 </video>
 
@@ -17,15 +17,17 @@ Uma aplicação de Food, clone do IFood.
 - Prisma
 - Shadcn/ui
 
-## Config
+#### Config
 - Prettier
 - Husky
 - ESLint
 - Git Hooks
 
-## screens
-<div>
-</div>
+#### Detalhes
+[x] - Carrinho de Compra
+[x] - Pesquisa por estabelecimento
+[x] - Operação de desconto
+[x] - Autenticação com Google
 
 ## UML
 <img 
