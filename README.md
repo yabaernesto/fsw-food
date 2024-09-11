@@ -23,12 +23,6 @@ Uma aplicação de Food, clone do IFood.
 - ESLint
 - Git Hooks
 
-#### Detalhes
-[x] - Carrinho de Compra
-[x] - Pesquisa por estabelecimento
-[x] - Operação de desconto
-[x] - Autenticação com Google
-
 ## UML
 <img 
   style="width: 350px"
