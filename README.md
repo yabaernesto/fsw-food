@@ -33,7 +33,7 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 
 Deve verificar aos seguintes pré-requisitos para poder instalar e executar o projeto:
 
-1.Editor de código: [VS Code](https://code.visualstudio.com/download/).
+1. Editor de código: [VS Code](https://code.visualstudio.com/download/).
 2. Deve ter instalado o [Git](https://git-scm.com/downloads/).
 3. Deve ter instalado o [Node.js](https://nodejs.org/en/).
 4. Deve ter uma conta do [Google](https://gogole.com/) e [Console Cloud Google](https://console.cloud.google.com/)
