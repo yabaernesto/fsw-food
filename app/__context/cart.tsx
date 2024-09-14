@@ -143,7 +143,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       include: {
         restaurant: {
           select: {
+            id: true;
             deliveryFee: true;
+            deliveryTimeMinutesMinutes: true;
           };
         };
       };
@@ -151,14 +153,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     quantity: number;
     emptyCart?: boolean;
   }) => {
+    if (emptyCart) {
+      setProducts([]);
+    }
+
     // VERIFICAR SE A ALGUM PRODUTO DE OUTRO RESTAURANTE NO CARRINHO
     const hasDifferentRestaurantProduct = products.some(
       (cartProduct) => cartProduct.restaurantId !== product.restaurantId,
     );
-
-    if (emptyCart) {
-      setProducts([]);
-    }
 
     // VERIFICAR SE O PRODUTO JA ESTA NO CARRINHO
     const isProductAlreadyOnCart = products.some(
