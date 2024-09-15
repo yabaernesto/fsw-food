@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./public/logo.png" alt="Logo do Projeto">
+  <img src="public/logo.png" alt="Logo do Projeto">
 </h1>
 
 # Fullstack Week Food

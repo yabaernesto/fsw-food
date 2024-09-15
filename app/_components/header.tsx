@@ -33,7 +33,7 @@ const Header = () => {
       <div className="relative h-[30px] w-[100px]">
         <Link href="/">
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="FSW Foods"
             fill
             className="object-cover"

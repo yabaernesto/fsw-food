@@ -25,26 +25,26 @@ const CartBanner = ({ restaurant }: CartBannerProps) => {
     (product) => product.restaurantId === restaurant.id,
   );
 
-  if (restaurantHasProductsOnCart) return null;
+  if (!restaurantHasProductsOnCart) return null;
 
   return (
-    <div className="border-1 fixed bottom-0 left-0 z-50 w-full border-solid border-muted bg-white p-5 pt-3 shadow-md">
+    <div className="fixed bottom-0 left-0 z-50 w-full border-t border-solid border-muted bg-white p-5 pt-3 shadow-md">
       <div className="flex items-center justify-between">
-        {/* PRECO */}
+        {/* PREÇO */}
         <div>
           <span className="text-xs text-muted-foreground">
             Total sem entrega
           </span>
           <h3 className="font-semibold">
-            {formatCurrency(totalPrice)}
+            {formatCurrency(totalPrice)}{" "}
             <span className="text-xs font-normal text-muted-foreground">
               {" "}
-              /{totalQuantity} {totalQuantity > 1 ? "itens" : "iten"}
+              / {totalQuantity} {totalQuantity > 1 ? "itens" : "item"}
             </span>
           </h3>
         </div>
+        {/* BOTÃO */}
 
-        {/* BOTAO */}
         <Button onClick={() => setIsCartOpen(true)}>Ver sacola</Button>
 
         <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
@@ -52,6 +52,7 @@ const CartBanner = ({ restaurant }: CartBannerProps) => {
             <SheetHeader>
               <SheetTitle className="text-left">Sacola</SheetTitle>
             </SheetHeader>
+
             <Cart setIsOpen={setIsCartOpen} />
           </SheetContent>
         </Sheet>
