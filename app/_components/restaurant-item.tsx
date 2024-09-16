@@ -23,9 +23,10 @@ const RestaurantItem = ({
   userFavoriteRestaurants,
 }: RestaurantItemProps) => {
   const { data } = useSession();
-  const isFavorite = userFavoriteRestaurants.some(
-    (fav) => fav.restaurantId === restaurant.id,
-  );
+  const isFavorite =
+    userFavoriteRestaurants?.some(
+      (fav) => fav.restaurantId === restaurant.id,
+    ) || false;
 
   const handleFavoriteClick = async () => {
     if (!data?.user.id) return;

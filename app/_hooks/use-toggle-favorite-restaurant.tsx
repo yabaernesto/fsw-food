@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import { toggleFavoriteRestaurant } from "../__actions/restaurant";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface useToggleFavoriteRestaurantProps {
   userId?: string;

@@ -24,10 +24,8 @@ const MyFavoriteRestaurants = async () => {
   return (
     <>
       <Header />
-
       <div className="px-5 py-6">
         <h2 className="mb-6 text-lg font-semibold">Restaurantes Favoritos</h2>
-
         <div className="flex w-full flex-col gap-6">
           {userFavoriteRestaurants.length > 0 ? (
             userFavoriteRestaurants.map(({ restaurant }) => (
@@ -40,7 +38,7 @@ const MyFavoriteRestaurants = async () => {
             ))
           ) : (
             <h3 className="font-medium">
-              Voce ainda nao marcou nenhum restaurante como favorito!
+              Você ainda não marcou nenhum restaurante como favorito.
             </h3>
           )}
         </div>
