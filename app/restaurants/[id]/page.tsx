@@ -56,7 +56,6 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
   if (!restaurant) {
     return notFound();
   }
-
   const session = await getServerSession(authOptions);
 
   const userFavoriteRestaurants = await db.userFavoriteRestaurant.findMany({
@@ -80,16 +79,16 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
               src={restaurant.imageUrl}
               alt={restaurant.name}
               fill
+              sizes="100%"
               className="rounded-full object-cover"
             />
           </div>
           <h1 className="text-xl font-semibold">{restaurant.name}</h1>
         </div>
 
-        {/* STAR */}
-        <div className="flex items-center gap-[3px] rounded-full bg-card-foreground px-2 py-[2px] text-white">
+        <div className="flex items-center gap-[3px] rounded-full bg-foreground px-2 py-[2px] text-white">
           <StarIcon size={12} className="fill-yellow-400 text-yellow-400" />
-          <span className="text-xs font-semibold">5.0%</span>
+          <span className="text-xs font-semibold">5.0</span>
         </div>
       </div>
 
@@ -111,12 +110,14 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
       </div>
 
       <div className="mt-6 space-y-4">
-        <h2 className="px-5 font-semibold">Mais pedidos</h2>
+        {/* TODO: mostrar produtos mais pedidos quando implementarmos realização de pedido */}
+        <h2 className="px-5 font-semibold">Mais Pedidos</h2>
         <ProductList products={restaurant.products} />
       </div>
 
       {restaurant.categories.map((category) => (
         <div className="mt-6 space-y-4" key={category.id}>
+          {/* TODO: mostrar produtos mais pedidos quando implementarmos realização de pedido */}
           <h2 className="px-5 font-semibold">{category.name}</h2>
           <ProductList products={category.products} />
         </div>
