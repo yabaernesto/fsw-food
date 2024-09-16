@@ -1,16 +1,12 @@
 import { useContext, useState } from "react";
-import { CartContext } from "../__context/cart";
-import CartIrem from "./cart-item";
+import CartItem from "./cart-item";
 import { Card, CardContent } from "./ui/card";
 import { formatCurrency } from "../_helpers/price";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
-import { createOrder } from "../__actions/order";
 import { OrderStatus } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
-import { toast } from "sonner";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,7 +17,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "./ui/alert-dialog";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { CartContext } from "../__context/cart";
+import { createOrder } from "../__actions/order";
 
 interface CartProps {
   // eslint-disable-next-line no-unused-vars
@@ -35,6 +34,7 @@ const Cart = ({ setIsOpen }: CartProps) => {
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
   const { data } = useSession();
+
   const { products, subtotalPrice, totalPrice, totalDiscounts, clearCart } =
     useContext(CartContext);
 
@@ -73,14 +73,14 @@ const Cart = ({ setIsOpen }: CartProps) => {
       setIsOpen(false);
 
       toast("Pedido finalizado com sucesso!", {
-        description: "Voce pode acompanha-lo na tela dos seus pedidos.",
+        description: "Você pode acompanhá-lo na tela dos seus pedidos.",
         action: {
-          label: "Meus pedidos",
+          label: "Meus Pedidos",
           onClick: () => router.push("/my-orders"),
         },
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsSubmitLoading(false);
     }
@@ -91,13 +91,13 @@ const Cart = ({ setIsOpen }: CartProps) => {
       <div className="flex h-full flex-col py-5">
         {products.length > 0 ? (
           <>
-            <div className="flex-auto space-y-2">
+            <div className="flex-auto space-y-4">
               {products.map((product) => (
-                <CartIrem key={product.id} cartProduct={product} />
+                <CartItem key={product.id} cartProduct={product} />
               ))}
             </div>
 
-            {/* CARD TOTAL */}
+            {/* TOTAIS */}
             <div className="mt-6">
               <Card>
                 <CardContent className="space-y-2 p-5">
@@ -117,8 +117,9 @@ const Cart = ({ setIsOpen }: CartProps) => {
 
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-muted-foreground">Entrega</span>
+
                     {Number(products?.[0].restaurant.deliveryFee) === 0 ? (
-                      <span className="uppercase text-primary">Gratis</span>
+                      <span className="uppercase text-primary">Grátis</span>
                     ) : (
                       formatCurrency(
                         Number(products?.[0].restaurant.deliveryFee),
@@ -136,6 +137,7 @@ const Cart = ({ setIsOpen }: CartProps) => {
               </Card>
             </div>
 
+            {/* FINALIZAR PEDIDO */}
             <Button
               className="mt-6 w-full"
               onClick={() => setIsConfirmDialogOpen(true)}
@@ -145,7 +147,7 @@ const Cart = ({ setIsOpen }: CartProps) => {
             </Button>
           </>
         ) : (
-          <h2 className="text-left font-medium">Sua sacola esta fazia.</h2>
+          <h2 className="text-left font-medium">Sua sacola está vazia.</h2>
         )}
       </div>
 
@@ -155,9 +157,9 @@ const Cart = ({ setIsOpen }: CartProps) => {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Desja finalizar seu pedido?</AlertDialogTitle>
+            <AlertDialogTitle>Deseja finalizar seu pedido?</AlertDialogTitle>
             <AlertDialogDescription>
-              Ao finalizar seu pedido, voce concorda com os termos e condicoes
+              Ao finalizar seu pedido, você concorda com os termos e condições
               da nossa plataforma.
             </AlertDialogDescription>
           </AlertDialogHeader>

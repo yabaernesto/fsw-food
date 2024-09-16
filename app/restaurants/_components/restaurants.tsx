@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { searchForRestaurants } from "../__actions/search";
 import Header from "@/app/_components/header";
 import RestaurantItem from "@/app/_components/restaurant-item";
+
 interface RestaurantProps {
   userFavoriteRestaurants: UserFavoriteRestaurant[];
 }
