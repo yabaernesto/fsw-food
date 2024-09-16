@@ -14,16 +14,16 @@ interface RestaurantItemProps {
   userId?: string;
   restaurant: Restaurant;
   className?: string;
-  userFavoriteRestourants: UserFavoriteRestaurant[];
+  userFavoriteRestaurants: UserFavoriteRestaurant[];
 }
 
 const RestaurantItem = ({
   restaurant,
   className,
   userId,
-  userFavoriteRestourants,
+  userFavoriteRestaurants,
 }: RestaurantItemProps) => {
-  const isFavorite = userFavoriteRestourants.some(
+  const isFavorite = userFavoriteRestaurants.some(
     (fav) => fav.restaurantId === restaurant.id,
   );
 
