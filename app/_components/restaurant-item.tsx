@@ -7,11 +7,11 @@ import { formatCurrency } from "../_helpers/price";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { cn } from "../_lib/utils";
-import { toggleFavoriteRestaurant } from "../__actions/restaurant";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
+import { toggleFavoriteRestaurant } from "../__actions/restaurant";
 
 interface RestaurantItemProps {
-  userId?: string;
   restaurant: Restaurant;
   className?: string;
   userFavoriteRestaurants: UserFavoriteRestaurant[];
@@ -20,21 +20,21 @@ interface RestaurantItemProps {
 const RestaurantItem = ({
   restaurant,
   className,
-  userId,
   userFavoriteRestaurants,
 }: RestaurantItemProps) => {
+  const { data } = useSession();
   const isFavorite = userFavoriteRestaurants.some(
     (fav) => fav.restaurantId === restaurant.id,
   );
 
   const handleFavoriteClick = async () => {
-    if (!userId) return;
+    if (!data?.user.id) return;
     try {
-      toggleFavoriteRestaurant(userId, restaurant.id);
+      await toggleFavoriteRestaurant(data?.user.id, restaurant.id);
       toast.success(
         isFavorite
           ? "Restaurante removido dos favoritos."
-          : "Restaurante favoritado com sucesso!",
+          : "Restaurante favoritado.",
       );
     } catch (error) {
       toast.error("Erro ao favoritar restaurante.");
@@ -43,23 +43,25 @@ const RestaurantItem = ({
 
   return (
     <div className={cn("min-w-[266px] max-w-[266px]", className)}>
-      <div className="space-y-3">
+      <div className="w-full space-y-3">
+        {/* IMAGEM */}
         <div className="relative h-[136px] w-full">
           <Link href={`/restaurants/${restaurant.id}`}>
             <Image
               src={restaurant.imageUrl}
-              alt={restaurant.name}
               fill
+              sizes="100%"
               className="rounded-lg object-cover"
+              alt={restaurant.name}
             />
           </Link>
 
           <div className="absolute left-2 top-2 flex items-center gap-[2px] rounded-full bg-primary bg-white px-2 py-[2px]">
             <StarIcon size={12} className="fill-yellow-400 text-yellow-400" />
-            <span className="text-xs font-semibold">5.0%</span>
+            <span className="text-xs font-semibold">5.0</span>
           </div>
 
-          {userId && (
+          {data?.user.id && (
             <Button
               size="icon"
               className={`absolute right-2 top-2 h-7 w-7 rounded-full bg-gray-700 ${isFavorite && "bg-primary hover:bg-gray-700"}`}
@@ -69,20 +71,22 @@ const RestaurantItem = ({
             </Button>
           )}
         </div>
-
+        {/* TEXTO */}
         <div>
           <h3 className="text-sm font-semibold">{restaurant.name}</h3>
+          {/* INFORMAÇÕES DA ENTREGA */}
           <div className="flex gap-3">
+            {/* CUSTO DE ENTREGA */}
             <div className="flex items-center gap-1">
               <BikeIcon className="text-primary" size={14} />
               <span className="text-xs text-muted-foreground">
                 {Number(restaurant.deliveryFee) === 0
-                  ? "Entrega gratis"
+                  ? "Entrega grátis"
                   : formatCurrency(Number(restaurant.deliveryFee))}
               </span>
             </div>
-
-            <div className="flex gap-3">
+            {/* TEMPO DE ENTREGA */}
+            <div className="flex items-center gap-1">
               <TimerIcon className="text-primary" size={14} />
               <span className="text-xs text-muted-foreground">
                 {restaurant.deliveryTimeMinutesMinutes} min
